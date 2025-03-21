@@ -1,0 +1,42 @@
+{
+    "platforms": {
+        "xname": {
+            "base_url": "https://gateway.xname.app",
+            "api_key": {
+                "location": "header",
+                "param_name": "x-api-key"
+            },
+            "endpoints": {
+                "base": {
+                    "path": "/xhs/level/:address",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "path",
+                            "name": "address"
+                        }
+                    ]
+                }
+            }
+        },
+        "talentprotocol": {
+            "base_url": "https://api.talentprotocol.com/api/v1/passports/:address",
+            "api_key": {
+                "location": "header",
+                "param_name": "X-API-KEY",
+                "prefix": "Bearer"
+            },
+            "endpoints": {
+                "base": {
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "path",
+                            "name": "address"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
