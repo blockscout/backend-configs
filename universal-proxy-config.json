@@ -20,7 +20,7 @@
             }
         },
         "talentprotocol": {
-            "base_url": "https://api.talentprotocol.com/api/v1/passports/:address",
+            "base_url": "https://api.talentprotocol.com",
             "api_key": {
                 "location": "header",
                 "param_name": "X-API-KEY",
@@ -28,6 +28,7 @@
             },
             "endpoints": {
                 "base": {
+                    "path": "/api/v1/passports/:address",
                     "method": "GET",
                     "params": [
                         {
