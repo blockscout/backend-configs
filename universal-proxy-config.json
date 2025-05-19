@@ -118,7 +118,7 @@
             }
         },
         "bankless": {
-            "base_url": "https://api.bankless.com/",
+            "base_url": "https://api.bankless.com",
             "api_key": {
                 "location": "header",
                 "param_name": "X-BANKLESS-TOKEN"
