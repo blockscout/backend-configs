@@ -104,9 +104,6 @@
                             "type": "address"
                         },                  {
                             "location": "query",
-                            "type": "chain_id"
-                        },                  {
-                            "location": "query",
                             "type": "chain_id_dependent",
                             "name": "chain",
                             "mapping": {
