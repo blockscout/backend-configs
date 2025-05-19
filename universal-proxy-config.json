@@ -74,7 +74,7 @@
             }
         },
         "humanpassport":  {
-            "base_url": "https://api.passport.xyz/",
+            "base_url": "https://api.passport.xyz",
             "api_key": {
                 "location": "header",
                 "param_name": "X-API-KEY"
