@@ -23,12 +23,109 @@
             "base_url": "https://api.talentprotocol.com",
             "api_key": {
                 "location": "header",
-                "param_name": "X-API-KEY",
-                "prefix": "Bearer"
+                "param_name": "X-API-KEY"                
             },
             "endpoints": {
                 "base": {
-                    "path": "/api/v1/passports/:address",
+                    "path": "/score",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "query",
+                            "name": "id",
+                            "type": "address"
+                        }
+                    ]
+                }
+            }
+        },
+        "efp": {
+            "base_url": "https://api.ethfollow.xyz",            
+            "endpoints": {
+                "base": {
+                    "path": "/api/v1/users/:address/stats",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "path",                            
+                            "type": "address"
+                        }
+                    ]
+                }
+            }
+        },
+        "webacy":  {
+            "base_url": "https://api.webacy.com",
+            "api_key": {
+                "location": "header",
+                "param_name": "x-api-key"
+            },
+            "endpoints": {
+                "base": {
+                    "path": "/addresses/:address",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "path",
+                            "type": "address"
+                        }
+                    ]
+                }
+            }
+        },
+        "humanpassport":  {
+            "base_url": "https://api.passport.xyz",
+            "api_key": {
+                "location": "header",
+                "param_name": "X-API-KEY"
+            },
+            "endpoints": {
+                "base": {
+                    "path": "/v2/stamps/10791/score/:address",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "path",
+                            "type": "address"
+                        }
+                    ]
+                }
+            }
+        },
+        "trustblock": {
+            "base_url": "https://api.trustblock.run",
+            "endpoints": {
+                "security": {
+                    "path": "v1/project/security",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "query",
+                            "type": "address"
+                        },                  {
+                            "location": "query",
+                            "type": "chain_id"
+                        },                  {
+                            "location": "query",
+                            "type": "chain_id_dependent",
+                            "name": "chain",
+                            "mapping": {
+                                "1": "ethereum"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "bankless": {
+            "base_url": "https://api.bankless.com",
+            "api_key": {
+                "location": "header",
+                "param_name": "X-BANKLESS-TOKEN"
+            },
+            "endpoints": {
+                "base": {
+                    "path": "/claimables/:address",
                     "method": "GET",
                     "params": [
                         {
