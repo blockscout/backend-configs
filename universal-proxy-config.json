@@ -27,7 +27,7 @@
             },
             "endpoints": {
                 "base": {
-                    "path": "/score/",
+                    "path": "/score",
                     "method": "GET",
                     "params": [
                         {
