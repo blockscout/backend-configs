@@ -32,7 +32,7 @@
                     "params": [
                         {
                             "location": "query",
-                            "param_name": "id",
+                            "name": "id",
                             "type": "address"
                         }
                     ]
