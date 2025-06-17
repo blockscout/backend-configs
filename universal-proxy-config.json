@@ -96,7 +96,8 @@
             "base_url": "https://api.trustblock.run",
             "api_key": {
                 "location": "header",
-                "param_name": "Authorization"
+                "param_name": "Authorization",
+                "prefix": "Bearer"
             },
             "endpoints": {
                 "security": {
