@@ -94,6 +94,10 @@
         },
         "trustblock": {
             "base_url": "https://api.trustblock.run",
+            "api_key": {
+                "location": "header",
+                "param_name": "Authorization"
+            },
             "endpoints": {
                 "security": {
                     "path": "v1/project/security",
@@ -102,12 +106,19 @@
                         {
                             "location": "query",
                             "type": "address"
-                        },                  {
+                        },                  
+                        {
                             "location": "query",
                             "type": "chain_id_dependent",
                             "name": "chain",
                             "mapping": {
-                                "1": "ethereum"
+                                "1": "ethereum",
+                                "10": "optimism",
+                                "137": "polygon",
+                                "324": "zksync",
+                                "8453": "base",
+                                "42161": "arbitrum",
+                                "534352": "scroll"
                             }
                         }
                     ]
