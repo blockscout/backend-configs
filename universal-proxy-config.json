@@ -144,6 +144,25 @@
                     ]
                 }
             }
+        },
+        "deepdao": {
+            "base_url": "https://api.deepdao.io",
+            "api_key": {
+                "location": "header",
+                "param_name": "x-api-key"
+            },
+            "endpoints": {
+                "base": {
+                    "path": "/v0.1/people/dao_gscore/:address",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "path",
+                            "type": "address"
+                        }
+                    ]
+                }
+            }
         }
     }
 }
