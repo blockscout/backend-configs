@@ -101,7 +101,7 @@
             },
             "endpoints": {
                 "security": {
-                    "path": "v1/project/security",
+                    "path": "/v1/project/security",
                     "method": "GET",
                     "params": [
                         {
