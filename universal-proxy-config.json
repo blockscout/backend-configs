@@ -106,7 +106,8 @@
                     "params": [
                         {
                             "location": "query",
-                            "type": "address"
+                            "type": "address",
+                            "name": "address"
                         },                  
                         {
                             "location": "query",
