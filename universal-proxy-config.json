@@ -100,7 +100,7 @@
                 "prefix": "Bearer"
             },
             "endpoints": {
-                "security": {
+                "base": {
                     "path": "/v1/project/security",
                     "method": "GET",
                     "params": [
