@@ -1,5 +1,20 @@
 {
     "platforms": {
+        "blockscoutbadges": {
+            "base_url": "https://badges.blockscout.com",
+            "endpoints": {
+                "base": {
+                    "path": "/api/badges/:address/counter",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "path",
+                            "type": "address"
+                        }
+                    ]
+                }
+            }
+        },
         "xname": {
             "base_url": "https://gateway.xname.app",
             "api_key": {
@@ -155,6 +170,21 @@
             "endpoints": {
                 "base": {
                     "path": "/v0.1/people/dao_gscore/:address",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "path",
+                            "type": "address"
+                        }
+                    ]
+                }
+            }
+        },
+        "smartmuv": {
+            "base_url": "https://api.smartmuv.app/",
+            "endpoints": {
+                "base": {
+                    "path": "/contract/:address",
                     "method": "GET",
                     "params": [
                         {
