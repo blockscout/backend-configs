@@ -194,6 +194,25 @@
                     ]
                 }
             }
+        },
+        "etherscore": {
+            "base_url": "https://beta.etherscore.network/",
+            "api_key": {
+                "location": "header",
+                "param_name": "x-api-key"
+            },
+            "endpoints": {
+                "base": {
+                    "path": "/public-api/v1/get_card/:address",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "path",
+                            "type": "address"
+                        }
+                    ]
+                }
+            }
         }
     }
 }
