@@ -181,7 +181,7 @@
             }
         },
         "smartmuv": {
-            "base_url": "https://api.smartmuv.app/",
+            "base_url": "https://api.smartmuv.app",
             "endpoints": {
                 "base": {
                     "path": "/contract/:address",
@@ -196,7 +196,7 @@
             }
         },
         "etherscore": {
-            "base_url": "https://beta.etherscore.network/",
+            "base_url": "https://beta.etherscore.network",
             "api_key": {
                 "location": "header",
                 "param_name": "x-api-key"
