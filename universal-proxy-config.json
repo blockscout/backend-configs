@@ -181,7 +181,7 @@
             }
         },
         "smartmuv": {
-            "base_url": "https://api.smartmuv.app/",
+            "base_url": "https://api.smartmuv.app",
             "endpoints": {
                 "base": {
                     "path": "/contract/:address",
