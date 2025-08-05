@@ -236,7 +236,7 @@
                             "mapping": {
                                 "1": "eth",                              
                                 "137": "polygon",                                
-                                "8453": "base",                                
+                                "8453": "base"                                
                             }
                         }
                     ]
@@ -262,7 +262,7 @@
                             "location": "query",
                             "type": "address",
                             "name": "contract_addresses"
-                        }, 
+                        }
                     ]
                 }
             }
