@@ -213,6 +213,74 @@
                     ]
                 }
             }
-        }
+        },
+        "bubblemaps": {
+            "base_url": "https://api.bubblemaps.io",
+            "api_key": {
+                "location": "header",
+                "param_name": "X-ApiKey"
+            },
+            "endpoints": {
+                "base": {
+                    "path": "/maps/:chain/:address?return_decentralization_score=true",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "path",
+                            "type": "address"
+                        },
+                        {
+                            "location": "path",
+                            "type": "chain_id_dependent",
+                            "name": "chain",
+                            "mapping": {
+                                "1": "eth",                              
+                                "137": "polygon",                                
+                                "8453": "base",                                
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "goplus": {
+            "base_url": "https://api.gopluslabs.io",
+            "api_key": {
+                "location": "header",
+                "param_name": "x-api-key"
+            },
+            "endpoints": {
+                "base": {
+                    "path": "/api/v1/token_security/:chain_id",
+                    "method": "GET",
+                    "params": [                
+                        {
+                            "location": "path",
+                            "type": "chain_id"                           
+                        },
+                        {
+                            "location": "query",
+                            "type": "address",
+                            "name": "contract_addresses"
+                        }, 
+                    ]
+                }
+            }
+        },
+        "gitpoap": {
+            "base_url": "https://public-api.gitpoap.io",
+            "endpoints": {
+                "base": {
+                    "path": "/v1/address/:address/gitpoaps",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "path",
+                            "type": "address"
+                        }
+                    ]
+                }
+            }
+        },
     }
 }
