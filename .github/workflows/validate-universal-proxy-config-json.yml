@@ -1,0 +1,21 @@
+name: Validate Universal Proxy Config JSON
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+    branches:
+      - main
+
+jobs:
+  verify-universal-proxy-config-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Validate JSON
+        uses: docker://orrosenblatt/validate-json-action:latest
+        env:
+          INPUT_SCHEMA: ./universal-proxy-config.schema.json
+          INPUT_JSONS: ./universal-proxy-config.json
