@@ -281,6 +281,45 @@
                     ]
                 }
             }
+        },
+        "drops": {
+            "base_url": "https://api.drops.bot",
+            "api_key": {
+                "location": "header",
+                "param_name": "x-api-key"
+            },
+            "endpoints": {
+                "base": {
+                    "path": "/shared/blockscout/address/:address",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "path",
+                            "type": "address"
+                        }
+                    ]
+                }
+            }
+        },
+        "kwik": {
+            "base_url": "https://api.kwikclaim.com",
+            "api_key": {
+                "location": "header",
+                "param_name": "x-api-key"
+            },
+            "endpoints": {
+                "base": {
+                    "path": "/v1/public/opportunities",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "query",
+                            "type": "address",
+                            "name": "address"
+                        }
+                    ]
+                }
+            }
         }
     }
 }
