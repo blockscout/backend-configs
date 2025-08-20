@@ -320,6 +320,22 @@
                     ]
                 }
             }
+        },
+        "humanode": {
+            "base_url": "https://www.humancheck.app",
+            "endpoints": {
+                "base": {
+                    "path": "/api/addresses",
+                    "method": "GET",
+                    "params": [
+                        {
+                            "location": "query",
+                            "type": "address",
+                            "name": "search"
+                        }
+                    ]
+                }
+            }
         }
     }
 }
