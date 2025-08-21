@@ -42,7 +42,7 @@
             },
             "endpoints": {
                 "base": {
-                    "path": "/score",
+                    "path": "/score?scorer_slug=creator_score",
                     "method": "GET",
                     "params": [
                         {
