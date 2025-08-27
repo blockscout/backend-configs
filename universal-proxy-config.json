@@ -116,7 +116,7 @@
             },
             "endpoints": {
                 "base": {
-                    "path": "/v1/project/security",
+                    "path": "/v1/project/blockscout-card",
                     "method": "GET",
                     "params": [
                         {
