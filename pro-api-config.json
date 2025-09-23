@@ -1,5 +1,5 @@
 {
-  "1": "https://eth.blockscout.com/",
-  "10": "https://explorer.optimism.io/",
-  "10200": "https://gnosis.blockscout.com/"
+  "17000": "https://eth-holesky.blockscout.com/",
+  "11155420": "https://testnet-explorer.optimism.io/",
+  "421614": "https://arbitrum-sepolia.blockscout.com/"
 }
