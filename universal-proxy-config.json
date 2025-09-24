@@ -83,6 +83,18 @@
                         {
                             "location": "path",
                             "type": "address"
+                        },
+                        {
+                            "location": "query",
+                            "type": "chain_id_dependent",
+                            "name": "chain",
+                            "mapping": {
+                                "1": "eth",
+                                "10": "opt",
+                                "137": "pol",                                
+                                "8453": "base",
+                                "42161": "arb"                             
+                            }
                         }
                     ]
                 }
