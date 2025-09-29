@@ -348,6 +348,19 @@
                     ]
                 }
             }
+        },
+        "ws_opm": {
+            "base_url": "wss://op-mainnet-fb-ws-pvt.optimism.io",
+            "api_key": {
+                "location": "path",
+                "param_name": "api_key"                
+            },
+            "endpoints": {
+                "base": {
+                    "path": "/ws/:api_key",
+                    "params": []
+                }
+            }
         }
     }
 }
