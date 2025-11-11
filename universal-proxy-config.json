@@ -362,6 +362,19 @@
                 }
             }
         },
+        "ws_megaeth_testnet_2": {
+            "base_url": "wss://timothy.megaeth.com",
+            "api_key": {
+                "location": "path",
+                "param_name": "api_key"                
+            },
+            "endpoints": {
+                "base": {
+                    "path": "/mafia/ws/:api_key",
+                    "params": []
+                }
+            }
+        },
         "ws_opm": {
             "base_url": "wss://op-mainnet-fb-ws-pvt.optimism.io",
             "api_key": {
