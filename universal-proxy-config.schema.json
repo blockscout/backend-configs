@@ -23,7 +23,7 @@
               "properties": {
                 "location": {
                   "type": "string",
-                  "enum": ["header", "query", "body"],
+                  "enum": ["header", "query", "body", "path"],
                   "description": "Where to place the API key"
                 },
                 "param_name": {
@@ -125,7 +125,7 @@
                       }
                     }
                   },
-                  "required": ["path", "method"],
+                  "required": ["path"],
                   "additionalProperties": false
                 }
               },
