@@ -351,7 +351,7 @@
         },
         "ws_megaeth": {
             "base_url": "wss://carrot.megaeth.com",
-             "api_key": {
+            "api_key": {
                 "location": "path",
                 "param_name": "api_key"                
             },
