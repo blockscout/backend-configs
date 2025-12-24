@@ -121,7 +121,11 @@
   "api/health/*": {
     "ip": {
       "period": "1s",
-      "limit": 5
+      "limit": 10
+    },
+    "whitelisted_ip": {
+      "period": "1s",
+      "limit": 50
     },
     "isolate_rate_limit?": true
   },
