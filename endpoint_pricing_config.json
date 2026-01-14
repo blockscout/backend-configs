@@ -3,7 +3,7 @@
   "api/v2/addresses/:address_hash": 20,
   "api/v2/blocks/:hash": 20,
   "api/v2/blocks/:number": 20,
-  "api/v2/blocks/:number/transactions": 10000000,
+  "api/v2/blocks/:number/transactions": 1000000,
   "api?action=balance&module=account": 20,
-  "api?action=getLogs&module=logs": 1000000
+  "api?action=getLogs&module=logs": 10000000
 }
