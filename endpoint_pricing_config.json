@@ -13,5 +13,7 @@
   "api/v2/addresses/:address_hash/token-transfers": 30,
   "api/v2/addresses/:address_hash/logs": 30,
   "api/v2/addresses/:address_hash/coin-balance-history": 50,  
-  "api/v2/smart-contracts/verification/config": 40
+  "api/v2/smart-contracts/verification/config": 40,
+  "api?action=getLogs&module=logs": 10000000,
+  "api/v2/blocks/:number/transactions": 1000000
 }
