@@ -1,0 +1,17 @@
+{
+  "default": 20,
+  "api/v2/search/quick": 25,      
+  "api/v2/transactions/:hash/logs": 30,
+  "api/v2/transactions/:hash/internal-transactions": 40,
+  "api/v2/transactions/:hash/token-transfers": 30,
+  "api/v2/transactions/:hash/summary": 50,
+  "api/v2/transactions/:hash/state-changes": 30,
+  "api/v2/transactions/:hash/raw-trace": 50, 
+  "api/v2/tokens": 30,
+  "api/v2/tokens/:address_hash/transfers": 30,    
+  "api/v2/addresses/:address_hash/internal-transactions": 40,
+  "api/v2/addresses/:address_hash/token-transfers": 30,
+  "api/v2/addresses/:address_hash/logs": 30,
+  "api/v2/addresses/:address_hash/coin-balance-history": 50,  
+  "api/v2/smart-contracts/verification/config": 40
+}
