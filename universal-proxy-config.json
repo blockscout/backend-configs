@@ -387,6 +387,25 @@
                     "params": []
                 }
             }
+        },
+        "enscribe": {
+            "base_url": "https://app.enscribe.xyz/",            
+            "endpoints": {
+                "base": {
+                    "path": "api/v1/bs/:chain_id/:address",
+                    "method": "GET",
+                    "params": [                
+                        {
+                            "location": "path",
+                            "type": "chain_id"                           
+                        },
+                        {
+                            "location": "path",
+                            "type": "address"                            
+                        }
+                    ]
+                }
+            }
         }
     }
 }
