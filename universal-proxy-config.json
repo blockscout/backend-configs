@@ -392,7 +392,7 @@
             "base_url": "https://app.enscribe.xyz/",            
             "endpoints": {
                 "base": {
-                    "path": "api/v1/bs/:chain_id/:address",
+                    "path": "api/v1/score/:chain_id/:address",
                     "method": "GET",
                     "params": [                
                         {
