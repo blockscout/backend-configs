@@ -12,6 +12,7 @@
   "api/v2/addresses/:address_hash/internal-transactions": 40,
   "api/v2/addresses/:address_hash/token-transfers": 30,
   "api/v2/addresses/:address_hash/logs": 30,
-  "api/v2/addresses/:address_hash/coin-balance-history": 50,  
+  "api/v2/addresses/:address_hash/coin-balance-history": 50,
+  "api/v2/advanced-filters": 50,
   "api/v2/smart-contracts/verification/config": 40
 }
