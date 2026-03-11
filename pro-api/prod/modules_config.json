@@ -1,0 +1,13 @@
+{
+  "services": {
+    "multichain": {
+      "service_url": "https://multichain-aggregator.services.blockscout.com",
+      "swagger_url": "https://raw.githubusercontent.com/blockscout/swaggers/refs/heads/master/services/multichain-aggregator/2.1.2/swagger.yaml",
+      "api_key": null,
+      "root": true,
+      "allowed_paths": [
+        "^\/api\/v1\/search:quick$"
+      ]
+    }
+  }
+}
