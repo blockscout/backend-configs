@@ -16,6 +16,14 @@
   "api/v2/smart-contracts/verification/config": 40,
   "api?action=getLogs&module=logs": 10000000,
   "api/v2/blocks/:number/transactions": 1000000,
+  "metadata/api/v1/metadata": 120,
   "multichain/api/v1/search:quick": 120,
-  "metadata/api/v1/metadata": 120
+  "multichain/api/v1/clusters/{cluster_id}/search/domains": 120,
+  "multichain/api/v1/clusters/{cluster_id}/search/addresses": 120,
+  "multichain/api/v1/clusters/{cluster_id}/search/block-numbers": 120,
+  "multichain/api/v1/clusters/{cluster_id}/search/blocks": 120,
+  "multichain/api/v1/clusters/{cluster_id}/search/nfts": 120,
+  "multichain/api/v1/clusters/{cluster_id}/search/tokens": 120,
+  "multichain/api/v1/clusters/{cluster_id}/search/transactions": 120,
+  "multichain/api/v1/clusters/{cluster_id}/search:quick": 120
 }

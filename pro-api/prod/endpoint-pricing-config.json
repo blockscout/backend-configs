@@ -14,5 +14,13 @@
   "api/v2/addresses/:address_hash/logs": 30,
   "api/v2/addresses/:address_hash/coin-balance-history": 50,
   "api/v2/advanced-filters": 50,
-  "api/v2/smart-contracts/verification/config": 40
+  "api/v2/smart-contracts/verification/config": 40,
+  "multichain/api/v1/clusters/{cluster_id}/search/domains": 120,
+  "multichain/api/v1/clusters/{cluster_id}/search/addresses": 120,
+  "multichain/api/v1/clusters/{cluster_id}/search/block-numbers": 120,
+  "multichain/api/v1/clusters/{cluster_id}/search/blocks": 120,
+  "multichain/api/v1/clusters/{cluster_id}/search/nfts": 120,
+  "multichain/api/v1/clusters/{cluster_id}/search/tokens": 120,
+  "multichain/api/v1/clusters/{cluster_id}/search/transactions": 120,
+  "multichain/api/v1/clusters/{cluster_id}/search:quick": 120
 }

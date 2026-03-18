@@ -1,12 +1,25 @@
 {
   "services": {
     "multichain": {
+      "description": "Multichain aggregator service for searching and fetching data across multiple blockchains",
       "service_url": "https://multichain-aggregator.services.blockscout.com",
       "swagger_url": "https://raw.githubusercontent.com/blockscout/swaggers/refs/heads/master/services/multichain-aggregator/2.1.2/swagger.yaml",
       "api_key": null,
       "root": true,
       "allowed_paths": [
-        "^\/api\/v1\/search:quick$"
+        "^/api/v1/search:quick$",
+        "^/api/v1/clusters/[^/]+/search/(?:addresses|block-numbers|blocks|domains|nfts|tokens|transactions)$",
+        "^/api/v1/clusters/[^/]+/search:quick$" 
+      ]
+    },
+    "metadata": {
+      "description": "Addresses metadata service for fetching metadata and tags for addresses",
+      "service_url": "https://metadata.services.blockscout.com",
+      "swagger_url": "https://raw.githubusercontent.com/blockscout/swaggers/refs/heads/master/services/metadata/2.6.16/swagger.yaml",
+      "api_key": null,
+      "root": true,
+      "allowed_paths": [
+        "^\/api\/v1\/metadata$"
       ]
     }
   }
