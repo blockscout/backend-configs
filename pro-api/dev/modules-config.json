@@ -9,7 +9,8 @@
       "allowed_paths": [
         "^/api/v1/search:quick$",
         "^/api/v1/clusters/[^/]+/search/(?:addresses|block-numbers|blocks|domains|nfts|tokens|transactions)$",
-        "^/api/v1/clusters/[^/]+/search:quick$" 
+        "^/api/v1/clusters/[^/]+/search:quick$",
+        "^/api/v1/clusters/[^/]+/chains$"
       ]
     },
     "metadata": {
