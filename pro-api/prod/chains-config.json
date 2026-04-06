@@ -94,14 +94,11 @@
   "763373": "https://explorer-sepolia.inkonchain.com",
   "5042002": "https://testnet.arcscan.app",
   "5278000": "https://kaigan.blockscout.com",
-  "9999999": "https://blockscout.mainnet.fluence.dev",
   "11142220": "https://celo-sepolia.blockscout.com",
   "11155111": "https://eth-sepolia.blockscout.com",
   "11155420": "https://testnet-explorer.optimism.io",
-  "52164803": "https://blockscout.testnet.fluence.dev",
   "89346162": "https://reya-cronos.blockscout.com",
   "245022926": "https://neon-devnet.blockscout.com",
   "245022934": "https://neon.blockscout.com",
-  "686669576": "https://polygon-cdk-stavanger.blockscout.com",
   "3735928814": "https://eden-testnet.blockscout.com"
 }
