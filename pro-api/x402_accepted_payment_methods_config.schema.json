@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "X402 Accepted Payment Methods Configuration",
+  "description": "Configuration schema for Pro API x402_accepted_payment_methods_config.json. Top-level keys are CAIP-2 network identifiers; second-level keys are ERC-20 token contract addresses. Each leaf object describes one accepted X402 payment method.",
+  "type": "object",
+  "patternProperties": {
+    "^[-a-z0-9]{3,8}:[-_a-zA-Z0-9]{1,32}$": {
+      "type": "object",
+      "description": "Payment methods accepted on this CAIP-2 network. Keys are ERC-20 token contract addresses.",
+      "patternProperties": {
+        "^0x[a-fA-F0-9]{40}$": {
+          "type": "object",
+          "description": "One accepted X402 payment method (one network + asset combination).",
+          "properties": {
+            "scheme": {
+              "type": "string",
+              "minLength": 1,
+              "description": "X402 payment scheme advertised to clients (e.g. 'exact')."
+            },
+            "network": {
+              "type": "string",
+              "pattern": "^[-a-z0-9]{3,8}:[-_a-zA-Z0-9]{1,32}$",
+              "description": "CAIP-2 network id; must match the parent map key."
+            },
+            "asset": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$",
+              "description": "ERC-20 token contract address; must match the inner map key."
+            },
+            "payTo": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$",
+              "description": "Recipient address that should receive the token transfer."
+            },
+            "maxTimeoutSeconds": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Maximum time window (seconds) forwarded to clients in the payment requirement."
+            },
+            "extra": {
+              "type": "object",
+              "description": "Arbitrary metadata forwarded to clients as-is (e.g. EIP-712 name/version for transferWithAuthorization tokens like USDC)."
+            },
+            "usd_per_token": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "description": "USD price of one whole token (human units, not wei). Used with billing credits and decimals to compute the on-chain amount at request time."
+            },
+            "decimals": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "ERC-20 decimals of the token (e.g. 6 for USDC)."
+            }
+          },
+          "required": [
+            "scheme",
+            "network",
+            "asset",
+            "payTo",
+            "maxTimeoutSeconds",
+            "extra",
+            "usd_per_token",
+            "decimals"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "minProperties": 1
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 1
+}

@@ -1,0 +1,17 @@
+{
+  "eip155:84532": {
+    "0x036CbD53842c5426634e7929541eC2318f3dCF7e": {
+      "scheme": "exact",
+      "network": "eip155:84532",
+      "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "payTo": "0xC983e478b973113568450C30e0b6C01730F068D0",
+      "maxTimeoutSeconds": 60,
+      "extra": {
+        "name": "USDC",
+        "version": "2"
+      },
+      "usd_per_token": 1.0,
+      "decimals": 6
+    }
+  }
+}
