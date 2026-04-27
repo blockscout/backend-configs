@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "X402 Accepted Payment Methods Configuration",
-  "description": "Configuration schema for Pro API x402_accepted_payment_methods_config.json. Top-level keys are CAIP-2 network identifiers; second-level keys are ERC-20 token contract addresses. Each leaf object describes one accepted X402 payment method.",
+  "description": "Configuration schema for Pro API x402-accepted-payment-methods-config.json. Top-level keys are CAIP-2 network identifiers; second-level keys are ERC-20 token contract addresses. Each leaf object describes one accepted X402 payment method.",
   "type": "object",
   "patternProperties": {
     "^[-a-z0-9]{3,8}:[-_a-zA-Z0-9]{1,32}$": {
