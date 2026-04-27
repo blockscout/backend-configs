@@ -1,0 +1,51 @@
+name: Validate Pro API Config JSON
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+    branches:
+      - main
+
+jobs:
+  verify-modules-config-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Validate modules-config JSON
+        uses: docker://orrosenblatt/validate-json-action:latest
+        env:
+          INPUT_SCHEMA: ./pro-api/modules-config.schema.json
+          INPUT_JSONS: ./pro-api/dev/modules-config.json,./pro-api/prod/modules-config.json
+
+  verify-x402-accepted-payment-methods-config-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Validate x402_accepted_payment_methods_config JSON
+        uses: docker://orrosenblatt/validate-json-action:latest
+        env:
+          INPUT_SCHEMA: ./pro-api/x402_accepted_payment_methods_config.schema.json
+          INPUT_JSONS: ./pro-api/dev/x402_accepted_payment_methods_config.json,./pro-api/prod/x402_accepted_payment_methods_config.json
+
+  verify-chains-config-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Validate chains-config JSON
+        uses: docker://orrosenblatt/validate-json-action:latest
+        env:
+          INPUT_SCHEMA: ./pro-api/chains-config.schema.json
+          INPUT_JSONS: ./pro-api/dev/chains-config.json,./pro-api/prod/chains-config.json
+
+  verify-endpoint-pricing-config-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Validate endpoint-pricing-config JSON
+        uses: docker://orrosenblatt/validate-json-action:latest
+        env:
+          INPUT_SCHEMA: ./pro-api/endpoint-pricing-config.schema.json
+          INPUT_JSONS: ./pro-api/dev/endpoint-pricing-config.json,./pro-api/prod/endpoint-pricing-config.json

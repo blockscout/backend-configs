@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pro API Chains Configuration",
+  "description": "Maps EVM chain IDs (decimal string keys) to Blockscout explorer base URLs.",
+  "type": "object",
+  "patternProperties": {
+    "^[0-9]+$": {
+      "type": "string",
+      "format": "uri",
+      "minLength": 1,
+      "description": "Explorer base URL for the chain."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 1
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pro API Modules Configuration",
+  "description": "Configuration schema for Pro API external service modules (modules_config.json). The top-level keys are URL path prefixes (e.g. 'services') and each nested key is a module name.",
+  "type": "object",
+  "patternProperties": {
+    "^[a-zA-Z0-9_-]+$": {
+      "type": "object",
+      "description": "URL path prefix group. Each key is a module name routed under this prefix (e.g. /<prefix>/<module_name>/...).",
+      "patternProperties": {
+        "^[a-zA-Z0-9_-]+$": {
+          "type": "object",
+          "description": "Per-module configuration",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Human-readable description of the module, exposed via GET /api/json/endpoints."
+            },
+            "service_url": {
+              "type": "string",
+              "format": "uri",
+              "description": "Base URL of the external service that matched requests are forwarded to."
+            },
+            "swagger_url": {
+              "type": "string",
+              "format": "uri",
+              "description": "URL of the service's OpenAPI 2.0 / 3.x spec (JSON or YAML) used to build the endpoint trie."
+            },
+            "api_key": {
+              "description": "How the service API key is attached to forwarded requests. Omit or set to null to forward without an API key.",
+              "oneOf": [
+                { "type": "null" },
+                {
+                  "type": "object",
+                  "properties": {
+                    "location": {
+                      "type": "string",
+                      "enum": ["header", "query"],
+                      "description": "Where the API key is attached on forwarded requests."
+                    },
+                    "param_name": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Name of the header or query parameter used for the API key (e.g. 'x-api-key')."
+                    },
+                    "env_var": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Name of the environment variable that holds the API key value."
+                    }
+                  },
+                  "required": ["location", "param_name", "env_var"],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "root": {
+              "type": "boolean",
+              "description": "If true, the module is also registered at the root of the endpoint trie and reachable as /<module_name>/... (in addition to /<prefix>/<module_name>/...)."
+            },
+            "allowed_paths": {
+              "type": "array",
+              "description": "Regex patterns applied to the full spec path; only operations matching at least one pattern are exposed.",
+              "items": {
+                "type": "string",
+                "format": "regex",
+                "minLength": 1
+              }
+            }
+          },
+          "required": ["service_url", "swagger_url", "root", "allowed_paths"],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "minProperties": 1
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 1
+}

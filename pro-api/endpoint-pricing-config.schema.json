@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pro API Endpoint Pricing Configuration",
+  "description": "Credit cost per endpoint path. The 'default' key is the fallback cost; other keys are route identifiers (paths, query-style routes, module prefixes, etc.).",
+  "type": "object",
+  "required": ["default"],
+  "properties": {
+    "default": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Default credit cost when no more specific route matches."
+    }
+  },
+  "additionalProperties": {
+    "type": "integer",
+    "minimum": 0
+  }
+}
