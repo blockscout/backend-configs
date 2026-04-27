@@ -24,11 +24,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Validate x402_accepted_payment_methods_config JSON
+      - name: Validate x402-accepted-payment-methods-config JSON
         uses: docker://orrosenblatt/validate-json-action:latest
         env:
-          INPUT_SCHEMA: ./pro-api/x402_accepted_payment_methods_config.schema.json
-          INPUT_JSONS: ./pro-api/dev/x402_accepted_payment_methods_config.json,./pro-api/prod/x402_accepted_payment_methods_config.json
+          INPUT_SCHEMA: ./pro-api/x402-accepted-payment-methods-config.schema.json
+          INPUT_JSONS: ./pro-api/dev/x402-accepted-payment-methods-config.json,./pro-api/prod/x402-accepted-payment-methods-config.json
 
   verify-chains-config-json:
     runs-on: ubuntu-latest
