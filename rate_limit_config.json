@@ -135,7 +135,7 @@
     "whitelisted_ip": true,
     "ip": {
       "period": "1m",
-      "limit": 300
+      "limit": 180
     },
     "temporary_token": true
   },
@@ -144,7 +144,7 @@
     "whitelisted_ip": true,
     "ip": {
       "period": "1m",
-      "limit": 300
+      "limit": 180
     },
     "temporary_token": true
   },
@@ -154,7 +154,7 @@
     "whitelisted_ip": true,
     "ip": {
       "period": "1m",
-      "limit": 300
+      "limit": 180
     },
     "temporary_token": false
   }
