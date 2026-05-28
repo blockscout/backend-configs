@@ -3,7 +3,8 @@ name: Build and Publish Pro API Swagger
 on:
   push:
     branches:
-      - "**"
+      - main
+      - np-swaggers-gen
     paths:
       - pro-api/dev/modules-config.json
       - pro-api/prod/modules-config.json
