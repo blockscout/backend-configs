@@ -1,0 +1,153 @@
+name: Build and Publish Pro API Swagger
+
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      - pro-api/dev/modules-config.json
+      - pro-api/prod/modules-config.json
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Which config to build and publish
+        required: true
+        type: choice
+        default: both
+        options:
+          - both
+          - dev
+          - prod
+
+permissions:
+  contents: read
+
+jobs:
+  determine-targets:
+    runs-on: ubuntu-latest
+    outputs:
+      run_dev: ${{ steps.targets.outputs.run_dev }}
+      run_prod: ${{ steps.targets.outputs.run_prod }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect target environment(s)
+        id: targets
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          run_dev=false
+          run_prod=false
+
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            case "${{ inputs.target }}" in
+              dev)
+                run_dev=true
+                ;;
+              prod)
+                run_prod=true
+                ;;
+              both)
+                run_dev=true
+                run_prod=true
+                ;;
+              *)
+                echo "Unsupported target: ${{ inputs.target }}" >&2
+                exit 1
+                ;;
+            esac
+          else
+            changed_files="$(git diff --name-only "${{ github.event.before }}" "${{ github.sha }}")"
+            echo "Changed files:"
+            echo "$changed_files"
+
+            if [[ "$changed_files" == *"pro-api/dev/modules-config.json"* ]]; then
+              run_dev=true
+            fi
+
+            if [[ "$changed_files" == *"pro-api/prod/modules-config.json"* ]]; then
+              run_prod=true
+            fi
+          fi
+
+          echo "run_dev=$run_dev" >> "$GITHUB_OUTPUT"
+          echo "run_prod=$run_prod" >> "$GITHUB_OUTPUT"
+
+  build-and-publish:
+    needs: determine-targets
+    if: |
+      (matrix.environment == 'dev' && needs.determine-targets.outputs.run_dev == 'true') ||
+      (matrix.environment == 'prod' && needs.determine-targets.outputs.run_prod == 'true')
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      matrix:
+        environment:
+          - dev
+          - prod
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: stable
+
+      - name: Install oastools
+        shell: bash
+        run: |
+          set -euo pipefail
+          go install github.com/erraggy/oastools/cmd/oastools@latest
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+          jq --version
+
+      - name: Build Pro API spec for ${{ matrix.environment }}
+        shell: bash
+        working-directory: pro-api/openapi-spec
+        run: |
+          set -euo pipefail
+          modules_url="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_SHA}/pro-api/${{ matrix.environment }}/modules-config.json"
+
+          jq --arg modules_url "$modules_url" \
+            '.modules_config.url = $modules_url' \
+            config.json > "config.${{ matrix.environment }}.ci.json"
+
+          ./build-pro-api.sh --config "config.${{ matrix.environment }}.ci.json"
+
+          cp pro-api.json "${RUNNER_TEMP}/pro-api-${{ matrix.environment }}-swagger.json"
+          rm -f "config.${{ matrix.environment }}.ci.json"
+
+      - name: Publish spec to blockscout/swaggers
+        env:
+          API_SPECS_PAT: ${{ secrets.API_SPECS_PAT }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ -z "${API_SPECS_PAT}" ]]; then
+            echo "API_SPECS_PAT is required" >&2
+            exit 1
+          fi
+
+          repo_dir="${RUNNER_TEMP}/swaggers"
+          git clone "https://x-access-token:${API_SPECS_PAT}@github.com/blockscout/swaggers.git" "$repo_dir"
+
+          target_path="services/pro-api/${{ matrix.environment }}/swagger.json"
+          mkdir -p "$(dirname "${repo_dir}/${target_path}")"
+          cp "${RUNNER_TEMP}/pro-api-${{ matrix.environment }}-swagger.json" "${repo_dir}/${target_path}"
+
+          cd "$repo_dir"
+          git config user.name "blockscout-bot"
+          git config user.email "blockscout-bot@users.noreply.github.com"
+
+          if git diff --quiet -- "$target_path"; then
+            echo "No changes in ${target_path}; nothing to commit."
+            exit 0
+          fi
+
+          git add "$target_path"
+          git commit -m "Update pro-api ${{ matrix.environment }} swagger from ${GITHUB_REPOSITORY}@${GITHUB_SHA}"
+          git push origin master
