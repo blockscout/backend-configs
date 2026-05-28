@@ -23,12 +23,18 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}
+
+env:
+  OASTOOLS_VERSION: v1.53.2
+
 jobs:
   determine-targets:
     runs-on: ubuntu-latest
     outputs:
-      run_dev: ${{ steps.targets.outputs.run_dev }}
-      run_prod: ${{ steps.targets.outputs.run_prod }}
+      matrix: ${{ steps.targets.outputs.matrix }}
+      has_targets: ${{ steps.targets.outputs.has_targets }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -40,57 +46,62 @@ jobs:
         run: |
           set -euo pipefail
 
-          run_dev=false
-          run_prod=false
+          envs=()
 
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             case "${{ inputs.target }}" in
-              dev)
-                run_dev=true
-                ;;
-              prod)
-                run_prod=true
-                ;;
-              both)
-                run_dev=true
-                run_prod=true
-                ;;
+              dev)  envs+=("dev") ;;
+              prod) envs+=("prod") ;;
+              both) envs+=("dev" "prod") ;;
               *)
                 echo "Unsupported target: ${{ inputs.target }}" >&2
                 exit 1
                 ;;
             esac
           else
-            changed_files="$(git diff --name-only "${{ github.event.before }}" "${{ github.sha }}")"
+            before_sha="${{ github.event.before }}"
+            if [[ "$before_sha" == "0000000000000000000000000000000000000000" ]]; then
+              changed_files="$(git show --name-only --pretty='' "${{ github.sha }}")"
+            else
+              changed_files="$(git diff --name-only "$before_sha" "${{ github.sha }}")"
+            fi
             echo "Changed files:"
             echo "$changed_files"
 
             if [[ "$changed_files" == *"pro-api/dev/modules-config.json"* ]]; then
-              run_dev=true
+              envs+=("dev")
             fi
 
             if [[ "$changed_files" == *"pro-api/prod/modules-config.json"* ]]; then
-              run_prod=true
+              envs+=("prod")
             fi
           fi
 
-          echo "run_dev=$run_dev" >> "$GITHUB_OUTPUT"
-          echo "run_prod=$run_prod" >> "$GITHUB_OUTPUT"
+          if [[ ${#envs[@]} -eq 0 ]]; then
+            echo "matrix={\"environment\":[]}" >> "$GITHUB_OUTPUT"
+            echo "has_targets=false" >> "$GITHUB_OUTPUT"
+          else
+            matrix=$(printf '%s\n' "${envs[@]}" | jq -R . | jq -sc '{environment: .}')
+            echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+            echo "has_targets=true" >> "$GITHUB_OUTPUT"
+          fi
 
   build-and-publish:
     needs: determine-targets
-    if: |
-      (matrix.environment == 'dev' && needs.determine-targets.outputs.run_dev == 'true') ||
-      (matrix.environment == 'prod' && needs.determine-targets.outputs.run_prod == 'true')
+    if: needs.determine-targets.outputs.has_targets == 'true'
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 1
-      matrix:
-        environment:
-          - dev
-          - prod
+      matrix: ${{ fromJSON(needs.determine-targets.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Checkout specs repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ vars.API_SPECS_REPOSITORY }}
+          token: ${{ secrets.API_SPECS_PAT }}
+          path: api-specs
 
       - name: Set up Go
         uses: actions/setup-go@v5
@@ -101,7 +112,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          go install github.com/erraggy/oastools/cmd/oastools@latest
+          go install "github.com/erraggy/oastools/cmd/oastools@${OASTOOLS_VERSION}"
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
           jq --version
 
@@ -121,34 +132,24 @@ jobs:
           cp pro-api.json "${RUNNER_TEMP}/pro-api-${{ matrix.environment }}-swagger.json"
           rm -f "config.${{ matrix.environment }}.ci.json"
 
-      - name: Publish spec to blockscout/swaggers
-        env:
-          API_SPECS_PAT: ${{ secrets.API_SPECS_PAT }}
+      - name: Publish spec to specs repository
         shell: bash
+        working-directory: api-specs
         run: |
           set -euo pipefail
 
-          if [[ -z "${API_SPECS_PAT}" ]]; then
-            echo "API_SPECS_PAT is required" >&2
-            exit 1
-          fi
-
-          repo_dir="${RUNNER_TEMP}/swaggers"
-          git clone "https://x-access-token:${API_SPECS_PAT}@github.com/blockscout/swaggers.git" "$repo_dir"
-
           target_path="services/pro-api/${{ matrix.environment }}/swagger.json"
-          mkdir -p "$(dirname "${repo_dir}/${target_path}")"
-          cp "${RUNNER_TEMP}/pro-api-${{ matrix.environment }}-swagger.json" "${repo_dir}/${target_path}"
-
-          cd "$repo_dir"
-          git config user.name "blockscout-bot"
-          git config user.email "blockscout-bot@users.noreply.github.com"
+          mkdir -p "$(dirname "$target_path")"
+          cp "${RUNNER_TEMP}/pro-api-${{ matrix.environment }}-swagger.json" "$target_path"
 
           if git diff --quiet -- "$target_path"; then
             echo "No changes in ${target_path}; nothing to commit."
             exit 0
           fi
 
+          git config user.name "blockscout-bot"
+          git config user.email "blockscout-bot@users.noreply.github.com"
           git add "$target_path"
           git commit -m "Update pro-api ${{ matrix.environment }} swagger from ${GITHUB_REPOSITORY}@${GITHUB_SHA}"
-          git push origin master
+          git pull --rebase
+          git push
