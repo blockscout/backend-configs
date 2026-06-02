@@ -28,6 +28,8 @@ concurrency:
 
 env:
   OASTOOLS_VERSION: v1.53.2
+  API_SPECS_REPOSITORY: blockscout/swaggers
+  API_SPECS_BRANCH: master
 
 jobs:
   determine-targets:
@@ -99,7 +101,8 @@ jobs:
       - name: Checkout specs repository
         uses: actions/checkout@v4
         with:
-          repository: ${{ vars.API_SPECS_REPOSITORY }}
+          repository: ${{ env.API_SPECS_REPOSITORY }}
+          ref: ${{ env.API_SPECS_BRANCH }}
           token: ${{ secrets.API_SPECS_PAT }}
           path: api-specs
 
