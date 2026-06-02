@@ -142,7 +142,7 @@ jobs:
           mkdir -p "$(dirname "$target_path")"
           cp "${RUNNER_TEMP}/pro-api-${{ matrix.environment }}-swagger.json" "$target_path"
 
-          if git diff --quiet -- "$target_path"; then
+          if [[ -z "$(git status --porcelain -- "$target_path")" ]]; then
             echo "No changes in ${target_path}; nothing to commit."
             exit 0
           fi

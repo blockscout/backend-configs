@@ -32,5 +32,5 @@
         "description": "Stats service for fetching stats for a blockchain"
       }
     }
-  }
+  } 
 }
