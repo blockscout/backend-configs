@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - np-add-bens-to-swagger
     paths:
       - pro-api/dev/modules-config.json
       - pro-api/prod/modules-config.json
