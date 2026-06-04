@@ -23,6 +23,9 @@
       "multichain": {
         "from_modules_config": "multichain",
         "handler": "extract-multichain.sh"
+      },
+      "bens": {
+        "from_modules_config": "bens"
       }
     }
   }

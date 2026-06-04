@@ -58,6 +58,7 @@ KEEP_INTERMEDIATES=false
 CACHE_CLEANUP=false
 DRY_RUN=false
 FORCE_DOWNLOAD=false
+DEFAULT_SERVICE_HANDLER="extract-service-module.sh"
 
 # --- Usage -------------------------------------------------------------------
 usage() {
@@ -129,6 +130,7 @@ preflight() {
 
     # Validate config JSON: top-level required fields and per-service shape.
     # Each entry in source.services must have either .swagger or .from_modules_config.
+    # Service handlers are optional and default to extract-service-module.sh.
     # If any service uses from_modules_config, modules_config.url must be set.
     if ! jq -e '
         .output.filename and .output.version
@@ -379,7 +381,7 @@ resolve_sources_tsv() {
         mc_arg=(--argjson mc 'null')
     fi
 
-    jq -r "${mc_arg[@]}" '
+    jq -r "${mc_arg[@]}" --arg default_service_handler "$DEFAULT_SERVICE_HANDLER" '
         # Normalise the modules-config slurp into a single object (or null).
         # When --slurpfile is used, $mc is an array of one object; when --argjson
         # is used to pass null, $mc itself is null.
@@ -435,14 +437,14 @@ resolve_sources_tsv() {
                 {
                     name: .key,
                     swagger: $mcs.swagger_url,
-                    handler: .value.handler,
+                    handler: (.value.handler // $default_service_handler),
                     allowed_paths: ($mcs.allowed_paths // [])
                 }
             else
                 {
                     name: .key,
                     swagger: .value.swagger,
-                    handler: .value.handler,
+                    handler: (.value.handler // $default_service_handler),
                     allowed_paths: null
                 }
             end
@@ -476,10 +478,10 @@ run_extraction() {
 
     info "Extracting: $handler $(basename "$input") -> $(basename "$output")"
     if [[ "$allowed_paths_json" != "null" ]]; then
-        EXTRACTION_PATH_REGEXES="$allowed_paths_json" "$handler_path" "$input" "$output" \
+        SERVICE_MODULE_NAME="$service" EXTRACTION_PATH_REGEXES="$allowed_paths_json" "$handler_path" "$input" "$output" \
             || { error "Extraction failed for $service"; exit $EXIT_EXTRACTION_FAILURE; }
     else
-        "$handler_path" "$input" "$output" \
+        SERVICE_MODULE_NAME="$service" "$handler_path" "$input" "$output" \
             || { error "Extraction failed for $service"; exit $EXIT_EXTRACTION_FAILURE; }
     fi
     EXTRACT_RESULT="$output"
@@ -592,7 +594,8 @@ if cfg_uses_modules_config; then
     MODULES_CONFIG_FILE="$DOWNLOAD_RESULT"
     # Dry-run does not write the target file; jq --slurpfile needs a real path.
     if [[ "$DRY_RUN" == true && -n "$MODULES_CONFIG_FILE" && ! -f "$MODULES_CONFIG_FILE" ]]; then
-        DRY_RUN_MODULES_CONFIG_PLACEHOLDER="${SCRIPT_DIR}/.modules-config.dry-run.json"
+        DRY_RUN_MODULES_CONFIG_PLACEHOLDER="$(mktemp "${TMPDIR:-/tmp}/modules-config.dry-run.XXXXXX.json")"
+        trap 'rm -f "$DRY_RUN_MODULES_CONFIG_PLACEHOLDER"' EXIT
         jq -n --slurpfile cfg "$CONFIG_FILE" '
             ($cfg[0].source.services | to_entries
                 | map(select(.value.from_modules_config))
