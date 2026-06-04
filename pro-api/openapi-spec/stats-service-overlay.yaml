@@ -1,0 +1,38 @@
+# stats-service-overlay.yaml — Strip /health, /update-status, non-GET methods, securityDefinitions
+#
+# Used by stats-service-extract.sh as the first stage of the pipeline.
+
+overlay: "1.0.0"
+info:
+  title: Stats service extraction overlay
+  version: 1.0.0
+
+actions:
+  # --- Remove /health endpoint --------------------------------------------------
+  - target: $.paths['/health']
+    description: Remove health check endpoint
+    remove: true
+
+  # --- Remove /api/v1/update-status endpoint -----------------------------------
+  - target: $.paths['/api/v1/update-status']
+    description: Remove internal update-status endpoint
+    remove: true
+
+  # --- Remove non-GET HTTP methods -----------------------------------------------
+  - target: $.paths.*.post
+    description: Remove POST operations
+    remove: true
+  - target: $.paths.*.put
+    description: Remove PUT operations
+    remove: true
+  - target: $.paths.*.patch
+    description: Remove PATCH operations
+    remove: true
+  - target: $.paths.*.delete
+    description: Remove DELETE operations
+    remove: true
+
+  # --- Remove securityDefinitions ------------------------------------------------
+  - target: $.securityDefinitions
+    description: Remove security definitions
+    remove: true

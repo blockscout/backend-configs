@@ -1,0 +1,90 @@
+# merge-overlay.yaml — Post-merge overlay for the unified Blockscout Pro API
+#
+# Used by merge-specs.sh as --post-overlay during join.
+# Handles branding, security, tag cleanup, and enrichment (rate-limit headers).
+#
+# Fields NOT handled here (require jq due to overlay limitations):
+#   - servers replacement (overlay update appends to arrays — by design)
+#   - info.version (dynamic, passed via script -v flag)
+
+overlay: "1.0.0"
+info:
+  title: Blockscout Pro merge overlay
+  version: 1.0.0
+
+actions:
+  # --- Drop top-level tags array (unused after join) ---------------------------
+  - target: $.tags
+    description: Remove top-level tags array
+    remove: true
+
+  # --- Global security requirement ---------------------------------------------
+  # Two schemes are listed as alternatives — clients may use either Bearer
+  # token (Authorization header) or apikey query parameter.
+  - target: $
+    description: Require bearerAuth or apiKeyAuth on every operation
+    update:
+      security:
+        - bearerAuth: []
+        - apiKeyAuth: []
+
+  # --- Branding ----------------------------------------------------------------
+  - target: $.info.title
+    description: Set API title
+    update: "Blockscout Pro API"
+  - target: $.info
+    description: Set description and contact URL
+    update:
+      description: "Blockscout's universal multichain API for accessing explorer-indexed blockchain data - such as addresses, transactions, blocks, tokens, NFTs, contracts, and related search/results endpoints - across supported networks through a single standardized interface."
+      contact:
+        url: "https://dev.blockscout.com/"
+
+  # --- Security scheme definitions ---------------------------------------------
+  - target: $.components
+    description: Add Bearer token and apikey query security schemes
+    update:
+      securitySchemes:
+        bearerAuth:
+          type: http
+          scheme: bearer
+          bearerFormat: JWT
+          description: >-
+            API key passed as a Bearer token in the Authorization header.
+        apiKeyAuth:
+          type: apiKey
+          in: query
+          name: apikey
+          description: >-
+            API key passed as the `apikey` query parameter.
+
+  # --- Enrichment (OAS 3.0 Header Object format) ------------------------------
+  # Targets every GET operation's 200 response. The "headers" key is object-
+  # merged, so existing headers (if any) are preserved alongside the new ones.
+  - target: $.paths.*.get.responses.200
+    description: Add rate-limit and credits response headers
+    update:
+      headers:
+        x-credits-remaining:
+          description: >-
+            Number of credits remaining in your plan.
+            Resets daily on the free plan, monthly otherwise.
+          schema:
+            type: integer
+        x-ratelimit-limit:
+          description: >-
+            Available requests per second with your plan.
+            Returns -1 on internal error.
+          schema:
+            type: integer
+        x-ratelimit-remaining:
+          description: >-
+            Remaining rate limit based on your queries.
+            Returns -1 on internal error.
+          schema:
+            type: integer
+        x-ratelimit-reset:
+          description: >-
+            Time in milliseconds until the rate limit resets.
+            Returns -1 on internal error.
+          schema:
+            type: integer

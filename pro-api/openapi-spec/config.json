@@ -1,0 +1,29 @@
+{
+  "output": {
+    "filename": "pro-api.json",
+    "version": "0.5.0"
+  },
+  "modules_config": {
+    "url": "https://raw.githubusercontent.com/blockscout/backend-configs/main/pro-api/prod/modules-config.json"
+  },
+  "source": {
+    "blockscout": {
+      "from_modules_config": "blockscout",
+      "handler": "blockscout-extract.sh"
+    },
+    "services": {
+      "stats-service": {
+        "from_modules_config": "blockscout.stats-service",
+        "handler": "stats-service-extract.sh"
+      },
+      "metadata": {
+        "from_modules_config": "metadata",
+        "handler": "extract-metadata.sh"
+      },
+      "multichain": {
+        "from_modules_config": "multichain",
+        "handler": "extract-multichain.sh"
+      }
+    }
+  }
+}

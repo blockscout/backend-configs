@@ -1,0 +1,58 @@
+# blockscout-overlay.yaml — Strip non-GET methods, vendor extensions, add chain_id
+#
+# Used by blockscout-extract.sh as the first stage of the pipeline.
+# Handles operations that overlay can do natively (map-key removal, array append).
+#
+# Operations NOT handled here (require jq):
+#   - Remove "key"/"apikey" parameters (array element removal leaves nulls)
+#   - Remove /v2/config/* and /api/v2/config/* paths (regex match across two
+#     possible upstream formats — see blockscout-extract.sh)
+#   - Rename path keys to /{chain_id}/[api/]v2/...
+
+overlay: "1.0.0"
+info:
+  title: Blockscout extraction overlay
+  version: 1.0.0
+
+actions:
+  # --- Remove non-GET HTTP methods --------------------------------------------
+  - target: $.paths.*.post
+    description: Remove POST operations
+    remove: true
+  - target: $.paths.*.put
+    description: Remove PUT operations
+    remove: true
+  - target: $.paths.*.patch
+    description: Remove PATCH operations
+    remove: true
+  - target: $.paths.*.delete
+    description: Remove DELETE operations
+    remove: true
+  - target: $.paths.*.options
+    description: Remove OPTIONS operations
+    remove: true
+  - target: $.paths.*.head
+    description: Remove HEAD operations
+    remove: true
+  - target: $.paths.*.trace
+    description: Remove TRACE operations
+    remove: true
+
+  # --- Remove Elixir-specific vendor extensions everywhere --------------------
+  - target: $..x-struct
+    description: Remove x-struct vendor extensions
+    remove: true
+  - target: $..x-validate
+    description: Remove x-validate vendor extensions
+    remove: true
+
+  # --- Add chain_id path parameter to all GET operations ---------------------
+  - target: $.paths.*.get.parameters
+    description: Add required chain_id path parameter
+    update:
+      name: chain_id
+      in: path
+      required: true
+      description: The ID of the blockchain
+      schema:
+        type: string
