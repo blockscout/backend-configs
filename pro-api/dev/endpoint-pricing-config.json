@@ -25,5 +25,19 @@
   "multichain/api/v1/clusters/{cluster_id}/search/nfts": 120,
   "multichain/api/v1/clusters/{cluster_id}/search/tokens": 120,
   "multichain/api/v1/clusters/{cluster_id}/search/transactions": 120,
-  "multichain/api/v1/clusters/{cluster_id}/search:quick": 120
+  "multichain/api/v1/clusters/{cluster_id}/search:quick": 120,
+  "bens/api/v1/{chain_id}/addresses/{address}": 120,
+  "bens/api/v1/{chain_id}/addresses:batch-resolve-names": 120,
+  "bens/api/v1/{chain_id}/addresses:lookup": 120,
+  "bens/api/v1/{chain_id}/domains/{name}": 120,
+  "bens/api/v1/{chain_id}/domains/{name}/events": 120,
+  "bens/api/v1/{chain_id}/domains:lookup": 120,
+  "bens/api/v1/{chain_id}/protocols": 120,
+  "bens/api/v1/addresses/{address}": 120,
+  "bens/api/v1/addresses:batch-resolve": 120,
+  "bens/api/v1/addresses:lookup": 120,
+  "bens/api/v1/domains/{name}": 120,
+  "bens/api/v1/domains/{name}/events": 120,
+  "bens/api/v1/domains:lookup": 120,
+  "bens/api/v1/protocols": 120
 }
