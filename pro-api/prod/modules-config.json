@@ -22,6 +22,16 @@
       "allowed_paths": [
         "^\/api\/v1\/metadata$"
       ]
+    },
+    "bens": {
+      "description": "Blockscout ENS service for fetching ENS data",
+      "service_url": "https://bens.services.blockscout.com",
+      "swagger_url": "https://raw.githubusercontent.com/blockscout/swaggers/refs/heads/master/services/bens/1.7.4/swagger.yaml",
+      "api_key": null,
+      "root": true,
+      "allowed_paths": [
+        "^\/?api\/v1(?:\/|$)"
+      ]
     }
   },
   "blockscout": {
