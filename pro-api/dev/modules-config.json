@@ -20,7 +20,7 @@
       "api_key": null,
       "root": true,
       "allowed_paths": [
-        "^\/api\/v1\/metadata$"
+        "^\/?api\/v1(?:\/|$)"
       ]
     },
     "bens": {
