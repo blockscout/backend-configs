@@ -7,7 +7,7 @@
       "payTo": "0xd441D9F4c59CB26253E2F0A7a62ac9cE7823b4b4",
       "maxTimeoutSeconds": 60,
       "extra": {
-        "name": "USDC",
+        "name": "USD Coin",
         "version": "2"
       },
       "usd_per_token": 1.0,
