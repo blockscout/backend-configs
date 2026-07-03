@@ -234,7 +234,7 @@
             },
             "endpoints": {
                 "base": {
-                    "path": "/maps/:chain/:address?return_decentralization_score=true",
+                    "path": "/v0/tokens/metrics/:chain/:address",
                     "method": "GET",
                     "params": [
                         {
