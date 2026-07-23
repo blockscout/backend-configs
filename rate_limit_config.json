@@ -134,8 +134,8 @@
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "1m",
-      "limit": 180
+      "period": "30s",
+      "limit": 30
     },
     "temporary_token": true
   },
@@ -143,8 +143,8 @@
     "static_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "1m",
-      "limit": 180
+      "period": "30s",
+      "limit": 30
     },
     "temporary_token": true
   },
@@ -153,8 +153,8 @@
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "1m",
-      "limit": 180
+      "period": "30s",
+      "limit": 30
     },
     "temporary_token": false
   }
