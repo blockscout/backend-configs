@@ -173,7 +173,7 @@
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "2s",
+      "period": "15s",
       "limit": 1
     },
     "temporary_token": false
@@ -183,7 +183,7 @@
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "2s",
+      "period": "15s",
       "limit": 1
     },
     "temporary_token": false
