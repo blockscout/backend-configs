@@ -137,7 +137,10 @@
       "period": "30s",
       "limit": 30
     },
-    "temporary_token": true
+    "temporary_token": {
+      "period": "1s",
+      "limit": 10
+    }
   },
   "api/account/v2/*": {
     "static_api_key": true,
@@ -146,7 +149,10 @@
       "period": "30s",
       "limit": 30
     },
-    "temporary_token": true
+    "temporary_token": {
+      "period": "1s",
+      "limit": 10
+    }
   },
   "default": {
     "static_api_key": true,
