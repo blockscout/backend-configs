@@ -153,8 +153,8 @@
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "2s",
-      "limit": 1
+      "period": "1s",
+      "limit": 0
     },
     "temporary_token": false
   },
@@ -163,8 +163,8 @@
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "2s",
-      "limit": 1
+      "period": "1s",
+      "limit": 0
     },
     "temporary_token": false
   },
@@ -173,8 +173,8 @@
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "15s",
-      "limit": 1
+      "period": "1s",
+      "limit": 0
     },
     "temporary_token": false
   },
@@ -183,8 +183,8 @@
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "15s",
-      "limit": 1
+      "period": "1s",
+      "limit": 0
     },
     "temporary_token": false
   },
