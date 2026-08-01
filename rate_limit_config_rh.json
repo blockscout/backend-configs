@@ -169,8 +169,8 @@
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "1s",
-      "limit": 0
+      "period": "1h",
+      "limit": 10
     },
     "temporary_token": false
   },
