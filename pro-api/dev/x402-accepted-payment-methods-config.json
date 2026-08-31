@@ -31,22 +31,6 @@
       "facilitator_id": "blockscout_facilitator"
     }
   },
-  "eip155:42220": {
-    "0xcebA9300f2b948710d2653dD7B07f33A8B32118C": {
-      "scheme": "exact",
-      "network": "eip155:42220",
-      "asset": "0xcebA9300f2b948710d2653dD7B07f33A8B32118C",
-      "payTo": "0xC983e478b973113568450C30e0b6C01730F068D0",
-      "maxTimeoutSeconds": 60,
-      "extra": {
-        "name": "USDC",
-        "version": "2"
-      },
-      "usd_per_token": 1.0,
-      "decimals": 6,
-      "facilitator_id": "blockscout_facilitator"
-    }
-  },
   "facilitators":{
     "coinbase_facilitator": {
       "url_env_key": "X402_FACILITATOR_COINBASE_URL",
