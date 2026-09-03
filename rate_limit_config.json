@@ -154,6 +154,46 @@
     },
     "temporary_token": true
   },
+  "api/v1": {
+    "static_api_key": true,
+    "account_api_key": true,
+    "whitelisted_ip": true,
+    "ip": {
+      "period": "1s",
+      "limit": 0
+    },
+    "temporary_token": false
+  },
+  "api": {
+    "static_api_key": true,
+    "account_api_key": true,
+    "whitelisted_ip": true,
+    "ip": {
+      "period": "1h",
+      "limit": 10
+    },
+    "temporary_token": false
+  },
+  "api/eth-rpc": {
+    "static_api_key": true,
+    "account_api_key": true,
+    "whitelisted_ip": true,
+    "ip": {
+      "period": "1s",
+      "limit": 0
+    },
+    "temporary_token": false
+  },
+  "api/v1/eth-rpc": {
+    "static_api_key": true,
+    "account_api_key": true,
+    "whitelisted_ip": true,
+    "ip": {
+      "period": "1s",
+      "limit": 0
+    },
+    "temporary_token": false
+  },
   "default": {
     "static_api_key": true,
     "account_api_key": true,
