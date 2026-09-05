@@ -118,6 +118,13 @@
     },
     "isolate_rate_limit?": true
   },
+  "api/v2/smart-contracts/:param/verification/via/standard-input": {
+    "ip": {
+      "period": "30m",
+      "limit": 1
+    },
+    "isolate_rate_limit?": true
+  },
   "api/v2/proxy/3rdparty/drops": {
     "ip": {
       "period": "12h",
