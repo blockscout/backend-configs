@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pro API Featured Chains Configuration",
+  "description": "Maps chain identifiers (any string keys) to featured-chain settings, including which Pro API plans may use the chain.",
+  "type": "object",
+  "additionalProperties": {
+    "type": "object",
+    "description": "Featured-chain settings for one chain identifier.",
+    "properties": {
+      "plans_allowed": {
+        "type": "array",
+        "description": "Pro API plans that are allowed to use this featured chain.",
+        "items": {
+          "type": "string",
+          "enum": ["Builder", "Pro", "Business"]
+        },
+        "minItems": 1,
+        "uniqueItems": true
+      }
+    },
+    "required": ["plans_allowed"],
+    "additionalProperties": false
+  },
+  "minProperties": 1
+}

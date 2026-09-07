@@ -49,3 +49,13 @@ jobs:
         env:
           INPUT_SCHEMA: ./pro-api/endpoint-pricing-config.schema.json
           INPUT_JSONS: ./pro-api/dev/endpoint-pricing-config.json,./pro-api/prod/endpoint-pricing-config.json
+
+  verify-featured-chains-config-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Validate featured-chains-config JSON
+        uses: docker://orrosenblatt/validate-json-action:latest
+        env:
+          INPUT_SCHEMA: ./pro-api/featured-chains-config.schema.json
+          INPUT_JSONS: ./pro-api/dev/featured-chains-config.json,./pro-api/prod/featured-chains-config.json
