@@ -118,6 +118,32 @@
     },
     "isolate_rate_limit?": true
   },
+  "api/v2/smart-contracts/:param/verification/via/standard-input": {
+    "ip": {
+      "period": "30m",
+      "limit": 1
+    },
+    "isolate_rate_limit?": true
+  },
+  "/api/v2/proxy/3rdparty/*": {
+    "static_api_key": true,
+    "whitelisted_ip": true,
+    "ip": {
+      "period": "1s",
+      "limit": 10
+    },
+    "temporary_token": {
+      "period": "1s",
+      "limit": 10
+    },
+    "isolate_rate_limit?": true
+  },
+  "api/v2/proxy/3rdparty/drops": {
+    "ip": {
+      "period": "12h",
+      "limit": 5
+    }
+  },
   "api/health/*": {
     "ip": {
       "period": "1s",
@@ -129,27 +155,13 @@
     },
     "isolate_rate_limit?": true
   },
-  "/api/v2/proxy/3rdparty/*": {
-    "static_api_key": true,
-    "account_api_key": true,
-    "whitelisted_ip": true,
-    "ip": {
-      "period": "1s",
-      "limit": 10
-    },
-    "temporary_token": {
-      "period": "1s",
-      "limit": 10
-    },
-    "isolate_rate_limit?": true
-  },
   "api/v2/*": {
     "static_api_key": true,
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "2m",
-      "limit": 120
+      "period": "1m",
+      "limit": 60
     },
     "temporary_token": {
       "period": "1s",
@@ -160,21 +172,58 @@
     "static_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "2m",
-      "limit": 120
+      "period": "1m",
+      "limit": 60
     },
-    "temporary_token": {
+    "temporary_token": true
+  },
+  "api/v1": {
+    "static_api_key": true,
+    "account_api_key": true,
+    "whitelisted_ip": true,
+    "ip": {
       "period": "1s",
+      "limit": 0
+    },
+    "temporary_token": false
+  },
+  "api": {
+    "static_api_key": true,
+    "account_api_key": true,
+    "whitelisted_ip": true,
+    "ip": {
+      "period": "1h",
       "limit": 10
-    }
+    },
+    "temporary_token": false
+  },
+  "api/eth-rpc": {
+    "static_api_key": true,
+    "account_api_key": true,
+    "whitelisted_ip": true,
+    "ip": {
+      "period": "1s",
+      "limit": 0
+    },
+    "temporary_token": false
+  },
+  "api/v1/eth-rpc": {
+    "static_api_key": true,
+    "account_api_key": true,
+    "whitelisted_ip": true,
+    "ip": {
+      "period": "1s",
+      "limit": 0
+    },
+    "temporary_token": false
   },
   "default": {
     "static_api_key": true,
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "2m",
-      "limit": 120
+      "period": "1m",
+      "limit": 60
     },
     "temporary_token": false
   }
