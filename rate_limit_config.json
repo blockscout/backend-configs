@@ -132,10 +132,7 @@
       "period": "1s",
       "limit": 10
     },
-    "temporary_token": {
-      "period": "1s",
-      "limit": 10
-    },
+    "temporary_token": true,
     "isolate_rate_limit?": true
   },
   "api/v2/proxy/3rdparty/drops": {
@@ -163,10 +160,7 @@
       "period": "1m",
       "limit": 60
     },
-    "temporary_token": {
-      "period": "1s",
-      "limit": 10
-    }
+    "temporary_token": true
   },
   "api/account/v2/*": {
     "static_api_key": true,
