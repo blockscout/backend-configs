@@ -125,6 +125,19 @@
     },
     "isolate_rate_limit?": true
   },
+  "/api/v2/proxy/3rdparty/*": {
+    "static_api_key": true,
+    "whitelisted_ip": true,
+    "ip": {
+      "period": "1s",
+      "limit": 10
+    },
+    "temporary_token": {
+      "period": "1s",
+      "limit": 10
+    },
+    "isolate_rate_limit?": true
+  },
   "api/v2/proxy/3rdparty/drops": {
     "ip": {
       "period": "12h",
@@ -147,17 +160,20 @@
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "1m",
-      "limit": 180
+      "period": "2m",
+      "limit": 120
     },
-    "temporary_token": true
+    "temporary_token": {
+      "period": "1s",
+      "limit": 10
+    }
   },
   "api/account/v2/*": {
     "static_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "1m",
-      "limit": 180
+      "period": "2m",
+      "limit": 120
     },
     "temporary_token": true
   },
@@ -206,8 +222,8 @@
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "1m",
-      "limit": 180
+      "period": "2m",
+      "limit": 120
     },
     "temporary_token": false
   }
