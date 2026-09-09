@@ -118,6 +118,26 @@
     },
     "isolate_rate_limit?": true
   },
+  "api/v2/smart-contracts/:param/verification/via/standard-input": {
+    "ip": {
+      "period": "30m",
+      "limit": 1
+    },
+    "isolate_rate_limit?": true
+  },
+  "/api/v2/proxy/3rdparty/*": {
+    "static_api_key": true,
+    "whitelisted_ip": true,
+    "ip": {
+      "period": "1m",
+      "limit": 180
+    },
+    "temporary_token": {
+      "period": "1s",
+      "limit": 10
+    },
+    "isolate_rate_limit?": true
+  },
   "api/v2/proxy/3rdparty/drops": {
     "ip": {
       "period": "12h",
@@ -140,17 +160,20 @@
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "1m",
-      "limit": 180
+      "period": "5m",
+      "limit": 150
     },
-    "temporary_token": true
+    "temporary_token": {
+      "period": "1s",
+      "limit": 10
+    }
   },
   "api/account/v2/*": {
     "static_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "1m",
-      "limit": 180
+      "period": "5m",
+      "limit": 150
     },
     "temporary_token": true
   },
@@ -199,8 +222,8 @@
     "account_api_key": true,
     "whitelisted_ip": true,
     "ip": {
-      "period": "1m",
-      "limit": 180
+      "period": "5m",
+      "limit": 150
     },
     "temporary_token": false
   }
