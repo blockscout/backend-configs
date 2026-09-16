@@ -180,7 +180,7 @@
     "whitelisted_ip": true,
     "ip": {
       "period": "1m",
-      "limit": 10
+      "limit": 60
     },
     "temporary_token": false,
     "isolate_rate_limit?": true
