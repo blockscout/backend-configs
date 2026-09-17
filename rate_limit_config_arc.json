@@ -124,6 +124,12 @@
       "limit": 5
     }
   },
+  "api/v2/proxy/3rdparty/noves-fi": {
+    "ip": {
+      "period": "1s",
+      "limit": 0
+    }
+  },
   "api/health/*": {
     "ip": {
       "period": "1s",
