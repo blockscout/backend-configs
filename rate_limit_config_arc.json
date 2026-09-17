@@ -124,7 +124,19 @@
       "limit": 5
     }
   },
-  "api/v2/proxy/3rdparty/noves-fi/*": {
+  "api/v2/proxy/3rdparty/noves-fi/transactions/:param": {
+    "ip": {
+      "period": "1s",
+      "limit": 0
+    }
+  },
+  "api/v2/proxy/3rdparty/noves-fi/addresses/:param/transactions": {
+    "ip": {
+      "period": "1s",
+      "limit": 0
+    }
+  },
+  "api/v2/proxy/3rdparty/noves-fi/transaction-descriptions": {
     "ip": {
       "period": "1s",
       "limit": 0
