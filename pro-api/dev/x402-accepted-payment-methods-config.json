@@ -11,7 +11,34 @@
         "version": "2"
       },
       "usd_per_token": 1.0,
-      "decimals": 6
+      "decimals": 6,
+      "facilitator_id": "coinbase_facilitator"
+    }
+  },
+  "eip155:11142220": {
+    "0x01C5C0122039549AD1493B8220cABEdD739BC44E": {
+      "scheme": "exact",
+      "network": "eip155:11142220",
+      "asset": "0x01C5C0122039549AD1493B8220cABEdD739BC44E",
+      "payTo": "0xC983e478b973113568450C30e0b6C01730F068D0",
+      "maxTimeoutSeconds": 60,
+      "extra": {
+        "name": "USDC",
+        "version": "2"
+      },
+      "usd_per_token": 1.0,
+      "decimals": 6,
+      "facilitator_id": "blockscout_facilitator"
+    }
+  },
+  "facilitators":{
+    "coinbase_facilitator": {
+      "url_env_key": "X402_FACILITATOR_COINBASE_URL",
+      "api_key_id_env_key": "CDP_API_KEY_ID",
+      "api_key_secret_env_key": "CDP_API_KEY_SECRET"
+    },
+    "blockscout_facilitator": {
+      "url_env_key": "X402_FACILITATOR_BLOCKSCOUT_URL"
     }
   }
 }
