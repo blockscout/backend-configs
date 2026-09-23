@@ -1,8 +1,38 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "X402 Accepted Payment Methods Configuration",
-  "description": "Configuration schema for Pro API x402-accepted-payment-methods-config.json. Top-level keys are CAIP-2 network identifiers; second-level keys are ERC-20 token contract addresses. Each leaf object describes one accepted X402 payment method.",
+  "description": "Configuration schema for Pro API x402-accepted-payment-methods-config.json. CAIP-2 network identifiers map to ERC-20 token contract addresses; each leaf object describes one accepted X402 payment method. The top-level `facilitators` object defines facilitator backends referenced by `facilitator_id`.",
   "type": "object",
+  "properties": {
+    "facilitators": {
+      "type": "object",
+      "description": "Named facilitator backends. Keys are facilitator ids referenced by payment methods via `facilitator_id`. Values describe which environment variables hold the facilitator URL and optional API credentials.",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "description": "One facilitator backend. `url_env_key` is required; API key env vars are optional (used by authenticated facilitators such as Coinbase).",
+        "properties": {
+          "url_env_key": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name of the environment variable that contains the facilitator URL."
+          },
+          "api_key_id_env_key": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name of the environment variable that contains the facilitator API key id."
+          },
+          "api_key_secret_env_key": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name of the environment variable that contains the facilitator API key secret."
+          }
+        },
+        "required": ["url_env_key"],
+        "additionalProperties": false
+      }
+    }
+  },
   "patternProperties": {
     "^[-a-z0-9]{3,8}:[-_a-zA-Z0-9]{1,32}$": {
       "type": "object",
@@ -50,6 +80,11 @@
               "type": "integer",
               "minimum": 0,
               "description": "ERC-20 decimals of the token (e.g. 6 for USDC)."
+            },
+            "facilitator_id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Id of the facilitator backend from the top-level `facilitators` map that should settle this payment method."
             }
           },
           "required": [
@@ -60,7 +95,8 @@
             "maxTimeoutSeconds",
             "extra",
             "usd_per_token",
-            "decimals"
+            "decimals",
+            "facilitator_id"
           ],
           "additionalProperties": false
         }
@@ -69,6 +105,7 @@
       "minProperties": 1
     }
   },
+  "required": ["facilitators"],
   "additionalProperties": false,
-  "minProperties": 1
+  "minProperties": 2
 }
