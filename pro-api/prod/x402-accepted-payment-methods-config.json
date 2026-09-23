@@ -11,7 +11,15 @@
         "version": "2"
       },
       "usd_per_token": 1.0,
-      "decimals": 6
+      "decimals": 6,
+      "facilitator_id": "coinbase_facilitator"
+    }
+  },
+  "facilitators":{
+    "coinbase_facilitator": {
+      "url_env_key": "X402_FACILITATOR_URL",
+      "api_key_id_env_key": "CDP_API_KEY_ID",
+      "api_key_secret_env_key": "CDP_API_KEY_SECRET"
     }
   }
 }
