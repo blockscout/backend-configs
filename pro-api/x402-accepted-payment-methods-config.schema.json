@@ -10,12 +10,17 @@
       "minProperties": 1,
       "additionalProperties": {
         "type": "object",
-        "description": "One facilitator backend. `url_env_key` is required; API key env vars are optional (used by authenticated facilitators such as Coinbase).",
+        "description": "One facilitator backend. `url_env_key` is required; API credential env vars are optional. Authenticated facilitators may use a single `api_key_env_key` (e.g. Circle) or a pair of `api_key_id_env_key` and `api_key_secret_env_key` (e.g. Coinbase).",
         "properties": {
           "url_env_key": {
             "type": "string",
             "minLength": 1,
             "description": "Name of the environment variable that contains the facilitator URL."
+          },
+          "api_key_env_key": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name of the environment variable that contains the facilitator API key."
           },
           "api_key_id_env_key": {
             "type": "string",
