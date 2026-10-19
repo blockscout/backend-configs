@@ -263,7 +263,7 @@
             },
             "endpoints": {
                 "base": {
-                    "path": "/api/v1/token_security/:chain_id",
+                    "path": "/api/v1/token_security_risk/:chain_id",
                     "method": "GET",
                     "params": [                
                         {
