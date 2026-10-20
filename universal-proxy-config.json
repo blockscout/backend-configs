@@ -259,7 +259,8 @@
             "base_url": "https://api.gopluslabs.io",
             "api_key": {
                 "location": "header",
-                "param_name": "x-api-key"
+                "param_name": "Authorization",
+                "prefix": "Bearer"
             },
             "endpoints": {
                 "base": {
