@@ -388,6 +388,19 @@
                 }
             }
         },
+        "ws_op_sepolia": {
+            "base_url": "wss://op-sepolia-fb-ws-pvt.optimism.io",
+            "api_key": {
+                "location": "path",
+                "param_name": "api_key"                
+            },
+            "endpoints": {
+                "base": {
+                    "path": "/ws/:api_key",
+                    "params": []
+                }
+            }
+        },
         "enscribe": {
             "base_url": "https://app.enscribe.xyz/",            
             "endpoints": {
