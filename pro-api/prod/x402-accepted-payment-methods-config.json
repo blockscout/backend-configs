@@ -36,7 +36,7 @@
       "scheme": "exact",
       "network": "eip155:42220",
       "asset": "0x3600000000000000000000000000000000000000",
-      "payTo": "0x242ba6d68ffeb4a098b591b32d370f973ff882b7",
+      "payTo": "0xd441D9F4c59CB26253E2F0A7a62ac9cE7823b4b4",
       "maxTimeoutSeconds": 60,
       "extra": {
         "name": "USDC",
