@@ -31,10 +31,10 @@
       "facilitator_id": "blockscout_facilitator"
     }
   },
-  "eip155:eip155:5042": {
+  "eip155:5042": {
     "0x3600000000000000000000000000000000000000": {
       "scheme": "exact",
-      "network": "eip155:42220",
+      "network": "eip155:5042",
       "asset": "0x3600000000000000000000000000000000000000",
       "payTo": "0xd441D9F4c59CB26253E2F0A7a62ac9cE7823b4b4",
       "maxTimeoutSeconds": 60,
