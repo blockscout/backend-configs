@@ -9,6 +9,24 @@
       "format": "uri",
       "description": "URL of the service's OpenAPI 2.0 / 3.x spec (JSON or YAML) used to build the endpoint trie."
     },
+    "featuredPaths": {
+      "type": "object",
+      "description": "Regex patterns applied to the full spec path, mapped to the Pro API plans allowed to use matching endpoints.",
+      "propertyNames": {
+        "type": "string",
+        "format": "regex",
+        "minLength": 1
+      },
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["Builder", "Pro", "Business"]
+        },
+        "minItems": 1,
+        "uniqueItems": true
+      }
+    },
     "apiKey": {
       "description": "How the service API key is attached to forwarded requests. Omit or set to null to forward without an API key.",
       "oneOf": [
@@ -52,6 +70,7 @@
         },
         "swagger_url": { "$ref": "#/definitions/swaggerUrl" },
         "api_key": { "$ref": "#/definitions/apiKey" },
+        "featured_paths": { "$ref": "#/definitions/featuredPaths" },
         "root": {
           "type": "boolean",
           "description": "If true, the module is also registered at the root of the endpoint trie and reachable as /<module_name>/... (in addition to /<prefix>/<module_name>/...)."
@@ -77,7 +96,8 @@
           "type": "string",
           "description": "Human-readable description of the nested service, exposed via GET /api/json/endpoints."
         },
-        "swagger_url": { "$ref": "#/definitions/swaggerUrl" }
+        "swagger_url": { "$ref": "#/definitions/swaggerUrl" },
+        "featured_paths": { "$ref": "#/definitions/featuredPaths" }
       },
       "required": ["swagger_url"],
       "additionalProperties": false
@@ -96,6 +116,7 @@
       "description": "Blockscout composite group: a Blockscout swagger spec plus nested service specs (e.g. stats).",
       "properties": {
         "swagger_url": { "$ref": "#/definitions/swaggerUrl" },
+        "featured_paths": { "$ref": "#/definitions/featuredPaths" },
         "services": {
           "type": "object",
           "description": "Nested services whose swagger specs are merged with the Blockscout spec.",
