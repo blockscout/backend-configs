@@ -11,7 +11,11 @@
         "^/api/v1/clusters/[^/]+/search/(?:addresses|block-numbers|blocks|domains|nfts|tokens|transactions)$",
         "^/api/v1/clusters/[^/]+/search:quick$",
         "^/api/v1/clusters/[^/]+/chains$"
-      ]
+      ],
+      "featured_paths": {
+        "^/api/v1/search:quick$": ["Builder", "Pro", "Business"],
+        "^/api/v1/clusters/[^/]+/search:quick$": ["Builder", "Pro", "Business"]
+      }
     },
     "metadata": {
       "description": "Addresses metadata service for fetching metadata and tags for addresses",
@@ -21,7 +25,10 @@
       "root": true,
       "allowed_paths": [
         "^\/api\/v1\/metadata$"
-      ]
+      ],
+      "featured_paths": {
+        "^/api/v1/metadata$": ["Builder", "Pro", "Business"]
+      }
     },
     "bens": {
       "description": "Blockscout ENS service for fetching ENS data",
@@ -31,15 +38,27 @@
       "root": true,
       "allowed_paths": [
         "^\/?api\/v1(?:\/|$)"
-      ]
+      ],
+      "featured_paths": {
+        "^/api/v1/protocols$": ["Builder", "Pro", "Business"],
+        "^/api/v1/[^/]+/protocols$": ["Builder", "Pro", "Business"]
+      }
     }
   },
   "blockscout": {
     "swagger_url": "https://raw.githubusercontent.com/blockscout/swaggers/refs/heads/master/blockscout/dev/all/swagger.yaml",
+    "featured_paths": {
+      "^/api/v2/stats$": ["Builder", "Pro", "Business"],
+      "^/api/v2/transactions$": ["Builder", "Pro", "Business"]
+    },
     "services": {
       "stats-service": {
         "swagger_url": "https://raw.githubusercontent.com/blockscout/swaggers/refs/heads/master/services/stats/2.15.0/swagger.yaml",
-        "description": "Stats service for fetching stats for a blockchain"
+        "description": "Stats service for fetching stats for a blockchain",
+        "featured_paths": {
+          "^/api/v1/counters$": ["Builder", "Pro", "Business"],
+          "^/api/v1/lines$": ["Builder", "Pro", "Business"]
+        }
       }
     }
   } 
