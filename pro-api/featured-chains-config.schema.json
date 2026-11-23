@@ -12,7 +12,7 @@
         "description": "Pro API plans that are allowed to use this featured chain.",
         "items": {
           "type": "string",
-          "enum": ["Builder", "Pro", "Business"]
+          "enum": ["Free", "Builder", "Pro", "Business"]
         },
         "minItems": 1,
         "uniqueItems": true
