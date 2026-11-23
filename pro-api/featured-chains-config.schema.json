@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Pro API Featured Chains Configuration",
-  "description": "Maps chain identifiers (any string keys) to featured-chain settings, including which Pro API plans may use the chain.",
+  "description": "Maps chain identifiers (any string keys) to featured-chain settings, including which Pro API plans may use the chain and the credits multiplier for its requests.",
   "type": "object",
   "additionalProperties": {
     "type": "object",
@@ -16,6 +16,11 @@
         },
         "minItems": 1,
         "uniqueItems": true
+      },
+      "credits_multiplier": {
+        "type": "integer",
+        "description": "Multiplier applied to the credits cost of every request to this chain. Defaults to 1.",
+        "minimum": 1
       }
     },
     "required": ["plans_allowed"],

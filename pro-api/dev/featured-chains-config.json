@@ -1,5 +1,6 @@
 {
   "421614": {
-    "plans_allowed": ["Builder", "Pro", "Business"]
+    "plans_allowed": ["Builder", "Pro", "Business"],
+    "credits_multiplier": 10
   }
 }
